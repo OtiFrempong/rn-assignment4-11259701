@@ -1,48 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 
-const Home = () => {
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  // ... Job data (either hardcoded or fetched from a backend)
+const JobCard = ({ job }) => (
+  <View style={styles.card}>
+    <Text>{job.title}</Text>
+    <Text>{job.company}</Text>
+    <Text>{job.salary}</Text>
+  </View>
+);
 
-  useEffect(() => {
-    // Retrieve user data from localStorage or backend
-    const storedUserName = localStorage.getItem('userName');
-    const storedUserEmail = localStorage.getItem('userEmail');
-    if (storedUserName) {
-      setUserName(storedUserName);
-    }
-    if (storedUserEmail) {
-      setUserEmail(storedUserEmail);
-    }
-  }, []);
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  // ... Logic to filter jobs based on searchTerm
+export default function Home({ route }) {
+  const { name, email } = route.params;
+  const featuredJobs = [
+    { title: 'Software Engineer', company: 'Facebook', salary: '$180,000' },
+    // ...other jobs
+  ];
+  const popularJobs = [
+    { title: 'Jr Executive', company: 'Burger King', salary: '$98,000' },
+    // ...other jobs
+  ];
 
   return (
-    <div className="home-container">
-      <h2>Welcome, {userName}</h2>
-      <p>Your email: {userEmail}</p>
-      <div className="search-bar">
-        <input type="text" placeholder="Search a job or position" value={searchTerm} onChange={handleSearchChange} />
-      </div>
-      {/* Display featured jobs */}
-      <h3>Featured Jobs</h3>
-      <div className="job-cards-container">
-        {/* ... Display JobCard components based on filtered jobs */}
-      </div>
-      {/* Display popular jobs */}
-      <h3>Popular Jobs</h3>
-      <div className="job-cards-container">
-        {/* ... Display JobCard components based on filtered jobs */}
-      </div>
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.header}>Welcome, {name}</Text>
+      <Text>{email}</Text>
+      <Text style={styles.subHeader}>Featured Jobs</Text>
+      <FlatList 
+        data={featuredJobs} 
+        renderItem={({ item }) => <JobCard job={item} />} 
+        keyExtractor={item => item.title} 
+      />
+      <Text style={styles.subHeader}>Popular Jobs</Text>
+      <FlatList 
+        data={popularJobs} 
+        renderItem={({ item }) => <JobCard job={item} />} 
+        keyExtractor={item => item.title} 
+      />
+    </View>
   );
-};
+}
 
-export default Home;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  header: {
+    fontSize: 24,
+    marginBottom: 10,
+  },
+  subHeader: {
+    fontSize: 18,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  card: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+  },
+});

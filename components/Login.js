@@ -1,47 +1,48 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const Login = () => {
+export default function Login({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    // Store user data in localStorage or send to a backend (for a real application)
-    localStorage.setItem('userName', name);
-    localStorage.setItem('userEmail', email);
-    navigate('/home'); // Redirect to the home screen
+  const handleLogin = () => {
+    navigation.navigate('Home', { name, email });
   };
 
   return (
-    <div className="login-container">
-      <h2>Jobizz</h2>
-      <p>Welcome Back 👋</p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <button type="submit">Log In</button>
-      </form>
-      {/* Add social login buttons if needed */}
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome Back</Text>
+      <TextInput 
+        style={styles.input} 
+        placeholder="Name" 
+        value={name} 
+        onChangeText={setName} 
+      />
+      <TextInput 
+        style={styles.input} 
+        placeholder="Email" 
+        value={email} 
+        onChangeText={setEmail} 
+      />
+      <Button title="Log In" onPress={handleLogin} />
+    </View>
   );
-};
+}
 
-export default Login;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 20,
+  },
+});
