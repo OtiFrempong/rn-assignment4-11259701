@@ -19,6 +19,6 @@ JobCard Description: A reusable component for displaying job details.
 
 
 **Screenshots**
-[alt text](assets/Screenshot1.jpg)
+[Login](assets/Screenshot1.jpg)
 
 ![HomePage](assets/Screenshot2.jpg)
