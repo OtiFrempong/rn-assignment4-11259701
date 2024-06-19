@@ -17,3 +17,8 @@ JobCard Description: A reusable component for displaying job details.
 •	It takes job as a prop and displays its details.
 •	It is used within the Home to render lists of featured and popular jobs.”
 
+
+**Screenshots**
+[alt text](assets/Screenshot1.jpg)
+
+![HomePage](assets/Screenshot2.jpg)
