@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function Login({ navigation }) {
+const Login = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
@@ -11,23 +11,25 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome Back</Text>
-      <TextInput 
-        style={styles.input} 
-        placeholder="Name" 
-        value={name} 
-        onChangeText={setName} 
+    <Text style={styles.title}>Jobizz</Text>
+      <Text style={styles.title}>Welcome Back👋</Text>
+      <Text style={styles.title}>Let's Login.Apply to jobs!</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Name"
+        value={name}
+        onChangeText={setName}
       />
-      <TextInput 
-        style={styles.input} 
-        placeholder="Email" 
-        value={email} 
-        onChangeText={setEmail} 
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
       />
       <Button title="Log In" onPress={handleLogin} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -46,3 +48,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default Login;
